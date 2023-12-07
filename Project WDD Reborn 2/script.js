@@ -9,22 +9,22 @@ const resultText = document.getElementById("result-text");
 
 //Setting up words to guess in the game
 let options = {
-  fruits: [
-    "Apple",
-    "Blueberry",
-    "Mandarin",
-    "Pineapple",
-    "Pomegranate",
-    "Watermelon",
+  Global: [
+    "Ecosystem",
+    "Deforestation",
+    "Climate",
+    "Enviroment",
+    "Ocean",
+    "Forest",
   ],
-  animals: ["Hedgehog", "Rhinoceros", "Squirrel", "Panther", "Walrus", "Zebra"],
-  countries: [
-    "India",
-    "Hungary",
-    "Kyrgyzstan",
-    "Switzerland",
-    "Zimbabwe",
-    "Dominica",
+  animals: ["Whale", "Tiger", "Penguins", "Panda", "Dolphin", "Turtle"],
+  waste: [
+    "OIl",
+    "Fossil",
+    "Biodegradable",
+    "Plastic",
+    "Trash",
+    "Recyclable",
   ],
 };
 
