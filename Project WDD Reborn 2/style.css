@@ -1,0 +1,142 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif; 
+}
+body {
+  background-color: #8c52ff; /* changing the colour of the background */
+}
+/* changing up the container in the middle: colour, size, position, etc. */
+.container {
+  font-size: 25px;
+  background-color: #ffffff; /* white */
+  width: 90vw; /* viewport's width, 1% per 1vw */
+  max-width: 34em; /* em is a unit, where 1 em is equal to the current font size of the parent element, meaning that 2 em is equal to 2 times the font size of the parent element */
+  position: absolute;    
+  transform: translate(-50%, -50%);  
+  top: 50%;
+  left: 50%;
+  padding: 3em;
+  border-radius: 0.6em;
+  box-shadow: 0 1.2em 2.4em rgba(111, 85, 0, 0.25);
+}
+/* making the text allign the center of the container */
+#options-container {
+  text-align: center;
+}
+#options-container div {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 1.2em 0 2.4em 0;
+}
+/* adjusting the size and colour of the buttons */
+#options-container button {
+  padding: 0.6em 1.2em;
+  border: 5px solid #000000;
+  background-color: #ffffff; /*white*/
+  color: #000000; /*black*/
+  border-radius: 0.3em;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+/* making the container that weren't chosen gray */
+#options-container button:disabled {
+  border: 4px solid #808080;
+  color: #808080;
+  background-color: #efefef;
+}
+#options-container button.active {
+  background-color: #8c52ff; /* purple */
+  border: 3px solid #000000; /* black */
+  color: #fff; /* white written in shorthand notation */
+}
+/* adjusting the container with letters: spacing between them, wrapping the text, etc. */
+.letter-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6em;
+}
+/* adjusting the inside of the container with letters: background color of them, size, and shape through border raius */
+#letter-container button {
+  height: 2.4em;
+  width: 2.4em;
+  border-radius: 1.3em;
+  background-color: #ffffff; /* white */
+  cursor: pointer;
+}
+/* adjusting the game over screen after a game round is finished */
+.new-game-popup {
+  background-color: #ffffff; /* white */
+  position: absolute; /* it is set to position: absolute to not affect other elements on the page */
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 0.6em;
+}
+/* adjusting the section the letters appear after pressing them */
+#user-input-section {
+  display: flex;
+  justify-content: center;
+  font-size: 1.8em;
+  margin: 0.6em 0 1.2em 0;
+}
+/* Setting up the canvas (box) around the hangman figure */
+canvas {
+  display: block;
+  margin: auto; 
+  border: 12px solid #8c52ff; /* purple */
+  border-radius: 10px;
+}
+/* makes the new game button dissapear letting it move onto the next screen
+    if removed the game won't function properly*/
+.hide {
+  display: none;
+}
+
+#result-text h2 {
+  font-size: 1.8em;
+  text-align: center;
+}
+/* Adjusts the message you get after the end of a round */
+#result-text p {
+  font-size: 1.25em;
+  margin: 1em 0 2em 0;
+}
+/* Adjusts the text which shows the result of the round*/	
+#result-text span {
+  font-weight: 700;
+}
+/* Adjusts the "new game" button, that shows up after finishing a round */
+#new-game-button {
+  font-size: 1.25em;
+  padding: 0.5em 1em;
+  background-color: #8c52ff; /* purple */
+  border: 3px solid #000000; /* black */
+  color: #fff; /* white written in a shorthand notation*/
+  border-radius: 0.2em;
+  cursor: pointer;
+}
+.win-msg {
+  color: #39d78d; /* greenish */
+}
+.lose-msg {
+  color: #fe5152; /* red */
+}
+/* Setting up @media rule */
+/* For 980px or less(blue) */
+@media screen and (max-width: 980px){
+		.header{
+			width: 95%
+			background-color: #bbe5ed;
+		}
+		.menu{
+			width
