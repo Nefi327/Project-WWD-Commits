@@ -28,13 +28,13 @@ let options = {
   ],
 };
 
-//count
+//Counts your wins and losses, and makes it start at 0
 let winCount = 0;
 let count = 0;
-// "" the word will be randomly chosen
+//An empty string 
 let chosenWord = "";
 
-//Display option buttons
+//Displays buttons that give you an option of which topic you want the word to be from
 const displayOptions = () => {
   optionsContainer.innerHTML += `<h3>Please Select An Option</h3>`;
   let buttonCon = document.createElement("div");
@@ -44,26 +44,25 @@ const displayOptions = () => {
   optionsContainer.appendChild(buttonCon);
 };
 
-//Block all the Buttons
+//Disables other buttons to press after already choosing a topic
 const blocker = () => {
   let optionsButtons = document.querySelectorAll(".options");
   let letterButtons = document.querySelectorAll(".letters");
-  //disable all options
   optionsButtons.forEach((button) => {
     button.disabled = true;
   });
 
-  //disable all letters
+  //Disables buttons with letters after pressing them
   letterButtons.forEach((button) => {
     button.disabled.true;
   });
   newGameContainer.classList.remove("hide");
 };
 
-//Word Generator
+//Generates a word
 const generateWord = (optionValue) => {
   let optionsButtons = document.querySelectorAll(".options");
-  //If optionValur matches the button innerText then highlight the button
+  //If optionValue matches the button innerText then highlight the button
   optionsButtons.forEach((button) => {
     if (button.innerText.toLowerCase() === optionValue) {
       button.classList.add("active");
@@ -71,19 +70,19 @@ const generateWord = (optionValue) => {
     button.disabled = true;
   });
 
-  //initially hide letters, clear previous word
+  //At the start hides the letters, and clears the previous word
   letterContainer.classList.remove("hide");
   userInputSection.innerText = "";
 
   let optionArray = options[optionValue];
-  //choose random word
+  //Code below chooses a random word from the list 
   chosenWord = optionArray[Math.floor(Math.random() * optionArray.length)];
   chosenWord = chosenWord.toUpperCase();
 
-  //replace every letter with span containing dash
+  //Makes place for correct letters to show up by using the span tag
   let displayItem = chosenWord.replace(/./g, '<span class="dashes">_</span>');
 
-  //Display each element as span
+  //Makes each element display as span
   userInputSection.innerHTML = displayItem;
 };
 
@@ -92,52 +91,53 @@ const initializer = () => {
   winCount = 0;
   count = 0;
 
-  //Initially erase all content and hide letteres and new game button
+  //At the start erases all content and hides letters and new game button
   userInputSection.innerHTML = "";
   optionsContainer.innerHTML = "";
   letterContainer.classList.add("hide");
   newGameContainer.classList.add("hide");
   letterContainer.innerHTML = "";
 
-  //For creating letter buttons
+  //Code below creates letter buttons for the game
   for (let i = 65; i < 91; i++) {
     let button = document.createElement("button");
     button.classList.add("letters");
     //Number to ASCII[A-Z]
+	//ASCII is an American Standard Code for Information Interchange
+	//It's a common character encoding format for text data
     button.innerText = String.fromCharCode(i);
-    //character button click
+    //Makes the letters clickable 
     button.addEventListener("click", () => {
       let charArray = chosenWord.split("");
       let dashes = document.getElementsByClassName("dashes");
-      //if array contains clciked value replace the matched dash with letter else dram on canvas
+	  //If array contains a clicked value then replaces the matched dash below with the letter which you chose
+	  //Else if array does not contain a correct letter then draw on the canvas
       if (charArray.includes(button.innerText)) {
         charArray.forEach((char, index) => {
-          //if character in array is same as clicked button
           if (char === button.innerText) {
-            //replace dash with letter
             dashes[index].innerText = char;
-            //increment counter
+			//If letter is correct, increments winCount value by 1
             winCount += 1;
-            //if winCount equals word lenfth
+            //If winCount = the number of letter in a word then you win
             if (winCount == charArray.length) {
               resultText.innerHTML = `<h2 class='win-msg'>You Win!!</h2><p>The word was <span>${chosenWord}</span></p>`;
-              //block all buttons
+              //After winning blocks all actions
               blocker();
             }
           }
         });
       } else {
-        //lose count
+        //If letter is incorrect, increment loss count by 1
         count += 1;
-        //for drawing man
+        //If "count" is incremented by 1 then draws a limb of the man
         drawMan(count);
-        //Count==6 because head,body,left arm, right arm,left leg,right leg
+        //Count==6 becasue: 1 head, 2 arms, 2 legs, and 1 torso
         if (count == 6) {
           resultText.innerHTML = `<h2 class='lose-msg'>You Lose!!</h2><p>The word was <span>${chosenWord}</span></p>`;
           blocker();
         }
       }
-      //disable clicked button
+      //Makes clicked buttons become blocked, making them unable to press again
       button.disabled = true;
     });
     letterContainer.append(button);
@@ -146,53 +146,53 @@ const initializer = () => {
   displayOptions();
   //Call to canvasCreator (for clearing previous canvas and creating initial canvas)
   let { initialDrawing } = canvasCreator();
-  //initialDrawing would draw the frame
+  //InitialDrawing would draw the frame
   initialDrawing();
 };
 
-//Canvas
+//Canvas where the stickam figurine is placed
 const canvasCreator = () => {
   let context = canvas.getContext("2d");
   context.beginPath();
   context.strokeStyle = "#000";
   context.lineWidth = 2;
 
-  //For drawing lines 
+  //For drawing lines of the figurine 
   const drawLine = (fromX, fromY, toX, toY) => {
     context.moveTo(fromX, fromY);
     context.lineTo(toX, toY);
     context.stroke();
   };
-
+//head
   const head = () => {
     context.beginPath();
     context.arc(70, 30, 10, 0, Math.PI * 2, true);
     context.stroke();
   };
-
+//body
   const body = () => {
     drawLine(70, 40, 70, 80);
   };
-
+//leftarm
   const leftArm = () => {
     drawLine(70, 50, 50, 70);
   };
-
+//rightarm
   const rightArm = () => {
     drawLine(70, 50, 90, 70);
   };
-
+//leftleg
   const leftLeg = () => {
     drawLine(70, 80, 50, 110);
   };
-
+//rightleg
   const rightLeg = () => {
     drawLine(70, 80, 90, 110);
   };
 
-  //initial frame
+  //Initial frame
   const initialDrawing = () => {
-    //clear canvas
+    //Clears canvas
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
     //bottom line
     drawLine(10, 130, 130, 130);
@@ -207,7 +207,7 @@ const canvasCreator = () => {
   return { initialDrawing, head, body, leftArm, rightArm, leftLeg, rightLeg };
 };
 
-//draw the man
+//For drawing the stickman figurine with lines
 const drawMan = (count) => {
   let { head, body, leftArm, rightArm, leftLeg, rightLeg } = canvasCreator();
   switch (count) {
@@ -234,6 +234,6 @@ const drawMan = (count) => {
   }
 };
 
-//New Game
+//Without this the game cannot be replayed and cannot start, new mage
 newGameButton.addEventListener("click", initializer);
 window.onload = initializer;
